@@ -17,38 +17,29 @@ export default function App() {
   const [department, setDepartment] = useState('');
   const [activityStatus, setActivityStatus] = useState('');
 
-  const handleSave = () => {
-    console.log('Dados salvos:', { userType, department, activityStatus });
-    // Implementar lógica de salvamento
-  };
-
   const handleClear = () => {
     setUserType('');
     setDepartment('');
     setActivityStatus('');
-    console.log('Campos limpos');
   };
 
-  // Obter informações do dispositivo
   const deviceInfo = {
-    platform: Constants.platform?.os || 'Desconhecido',
+    sdks: Constants.supportedExpoSdks || 'Desconhecido',
     deviceName: Constants.deviceName || 'Desconhecido',
-    model: Constants.platform?.model || 'Desconhecido'
+    version: Constants.systemVersion || 'Desconhecido'
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#2c3e50" />
       
-      {/* Cabeçalho */}
       <View style={styles.header}>
         <Ionicons name="people-circle-outline" size={28} color="#fff" />
-        <Text style={styles.headerTitle}>Cadastro de Usuário</Text>
+        <Text style={styles.headerTitle}>Gestão de funcionários</Text>
       </View>
       
       <ScrollView style={styles.scrollView}>
         <View style={styles.content}>
-          {/* Tipo de Usuário */}
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Tipo de Usuário</Text>
             <View style={styles.pickerContainer}>
@@ -66,7 +57,6 @@ export default function App() {
             </View>
           </View>
           
-          {/* Departamento */}
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Departamento</Text>
             <View style={styles.pickerContainer}>
@@ -105,14 +95,13 @@ export default function App() {
             </View>
           </View>
           
-          {/* Informações do Dispositivo */}
           <View style={styles.deviceInfoContainer}>
             <Text style={styles.deviceInfoTitle}>Informações do Dispositivo</Text>
             
             <View style={styles.deviceInfoItem}>
               <Ionicons name="phone-portrait-outline" size={20} color="#3498db" />
-              <Text style={styles.deviceInfoLabel}>Sistema Operacional:</Text>
-              <Text style={styles.deviceInfoValue}>{deviceInfo.platform}</Text>
+              <Text style={styles.deviceInfoLabel}>Versão do Android:</Text>
+              <Text style={styles.deviceInfoValue}>{deviceInfo.version}</Text>
             </View>
             
             <View style={styles.deviceInfoItem}>
@@ -123,8 +112,8 @@ export default function App() {
             
             <View style={styles.deviceInfoItem}>
               <Ionicons name="hardware-chip-outline" size={20} color="#3498db" />
-              <Text style={styles.deviceInfoLabel}>Modelo:</Text>
-              <Text style={styles.deviceInfoValue}>{deviceInfo.model}</Text>
+              <Text style={styles.deviceInfoLabel}>SDK:</Text>
+              <Text style={styles.deviceInfoValue}>{deviceInfo.sdks}</Text>
             </View>
           </View>
         </View>
@@ -138,14 +127,6 @@ export default function App() {
         >
           <Ionicons name="refresh-outline" size={20} color="#fff" />
           <Text style={styles.buttonText}>Limpar</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={[styles.button, styles.saveButton]} 
-          onPress={handleSave}
-        >
-          <Ionicons name="save-outline" size={20} color="#fff" />
-          <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
